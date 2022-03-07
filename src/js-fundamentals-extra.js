@@ -86,16 +86,16 @@ console.log(makeSentence("what is the Time"));
 //
 // TODO: write code below
 
-// const fileExtension = (fileName) => {
-//   return (
-//     fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length) ||
-//     fileName
-//   );
-// };
+const fileExtensionA = (fileName) => {
+  return (
+    fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length) ||
+    fileName
+  );
+};
 
-// const fileExtension = (fileName) => {
-//   return fileName.split(".").pop();
-// };
+const fileExtensionB = (fileName) => {
+  return fileName.split(".").pop();
+};
 
 const fileExtension = (fileName) => {
   const array = fileName.split(".");
@@ -114,6 +114,7 @@ const fileExtension = (fileName) => {
 // If a[0] === "" and a.length === 2 it's a hidden file with no extension ie. .htaccess
 
 console.log(fileExtension("temp"));
+
 // Range
 //
 // Create a function that takes an array of numbers and returns the difference
@@ -124,6 +125,12 @@ console.log(fileExtension("temp"));
 // with a reference to your function.
 //
 // TODO: write code below
+
+const range = (array) => {
+  maxNum = array.reduce((x, y) => (x > y ? x : y));
+  minNum = array.reduce((x, y) => (x < y ? x : y));
+  return maxNum - minNum;
+};
 
 // CheckTransactions
 //
@@ -142,8 +149,19 @@ console.log(fileExtension("temp"));
 //
 // TODO: write code below
 
+const checkTransactions = (transArray, startBal, overDraft) => {
+  const transArrayTotal = transArray.reduce((x, y) => x + y, 0);
+  const availableFunds = startBal + overDraft;
+  const balance = availableFunds + transArrayTotal;
+
+  return balance >= 0;
+};
+
+let arrayA = [10, 5, 10];
+
+console.log(checkTransactions(arrayA, 0, 200));
 // FilmsInGenre
-//
+
 // Create a function that takes an array of film objects, a film genre, and returns
 // an array of film names that match the supplied genre. Each film object contains a
 // `name` key that contains the film name and a 'genre' key that contains an array
@@ -154,6 +172,42 @@ console.log(fileExtension("temp"));
 // with a reference to your function.
 //
 // TODO: write code below
+
+const films = [
+  {
+    name: "The Power Of The Dog",
+    genres: ["Drama", "Western"],
+  },
+  {
+    name: "Dune",
+    genres: ["Sci-Fi"],
+  },
+  {
+    name: "The Matrix Resurrections",
+    genres: ["Sci-Fi"],
+  },
+  {
+    name: "The Last Duel",
+    genres: ["Drama", "History"],
+  },
+];
+
+let g = "Drama";
+console.log(films[0].name);
+console.log(films[0].genres);
+console.log(films[0].genres.includes(g));
+
+const filmsInGenre = (filmsArray, soughtGenre) => {
+  const filmsList = [];
+  for (j = 0; j < filmsArray.length; j++) {
+    if (filmsArray[j].genres.includes(soughtGenre)) {
+      filmsList.push(filmsArray[j].name);
+    }
+  }
+  return filmsList;
+};
+
+console.log("line 192", filmsInGenre(films, "History"));
 
 // TODO: change undefined to be the name of the functions you defined
 module.exports = {
@@ -173,11 +227,11 @@ module.exports = {
   e: fileExtension,
 
   //Range
-  f: undefined,
+  f: range,
 
   //CheckTransactions
-  g: undefined,
+  g: checkTransactions,
 
   //FilmsInGenre
-  h: undefined,
+  h: filmsInGenre,
 };
